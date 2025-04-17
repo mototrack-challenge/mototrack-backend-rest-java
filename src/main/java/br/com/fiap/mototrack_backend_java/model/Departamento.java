@@ -15,7 +15,7 @@ public class Departamento {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @OneToMany(mappedBy = "departamento_id")
+    @OneToMany(mappedBy = "departamento")
     private List<Movimentacao> movimentacoes;
 
     public Departamento() {

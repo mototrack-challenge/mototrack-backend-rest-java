@@ -22,10 +22,10 @@ public class Moto {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "moto_id")
+    @OneToMany(mappedBy = "moto")
     private List<Movimentacao> movimentacoes;
 
-    @OneToMany(mappedBy = "moto_id")
+    @OneToMany(mappedBy = "moto")
     private List<Alerta> alertas;
 
     public Moto() {
