@@ -1,0 +1,71 @@
+package br.com.fiap.mototrack_backend_java.model;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "alertas")
+public class Alerta {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String mensagem;
+
+    @Column(name = "data_alerta", nullable = false)
+    private LocalDateTime dataAlerta;
+
+    @ManyToOne
+    @JoinColumn(name = "moto_id")
+    private Moto moto;
+
+    public Alerta() {
+    }
+
+    public Alerta(String mensagem, LocalDateTime dataAlerta, Moto moto) {
+        this.mensagem = mensagem;
+        this.dataAlerta = dataAlerta;
+        this.moto = moto;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.dataAlerta == null) {
+            this.dataAlerta = LocalDateTime.now();
+        }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public LocalDateTime getDataAlerta() {
+        return dataAlerta;
+    }
+
+    public void setDataAlerta(LocalDateTime dataAlerta) {
+        this.dataAlerta = dataAlerta;
+    }
+
+    public Moto getMoto() {
+        return moto;
+    }
+
+    public void setMoto(Moto moto) {
+        this.moto = moto;
+    }
+}

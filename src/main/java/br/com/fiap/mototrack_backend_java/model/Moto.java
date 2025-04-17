@@ -61,7 +61,7 @@ public class Moto {
         this.modelo = modelo;
     }
 
-    public StatusType getStatus() {
+    public Status getStatus() {
         return status;
     }
 
