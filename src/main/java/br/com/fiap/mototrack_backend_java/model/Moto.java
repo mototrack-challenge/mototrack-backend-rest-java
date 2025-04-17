@@ -2,6 +2,8 @@ package br.com.fiap.mototrack_backend_java.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "mt_motos")
 public class Moto {
@@ -20,10 +22,10 @@ public class Moto {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "moto")
+    @OneToMany(mappedBy = "moto_id")
     private List<Movimentacao> movimentacoes;
 
-    @OneToMany(mappedBy = "moto")
+    @OneToMany(mappedBy = "moto_id")
     private List<Alerta> alertas;
 
     public Moto() {
@@ -63,7 +65,7 @@ public class Moto {
         return status;
     }
 
-    public void setStatus(StatusType status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

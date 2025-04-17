@@ -2,7 +2,7 @@ package br.com.fiap.mototrack_backend_java.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "mt_departamentos")
@@ -15,7 +15,7 @@ public class Departamento {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @OneToMany(mappedBy = "departamento")
+    @OneToMany(mappedBy = "departamento_id")
     private List<Movimentacao> movimentacoes;
 
     public Departamento() {
