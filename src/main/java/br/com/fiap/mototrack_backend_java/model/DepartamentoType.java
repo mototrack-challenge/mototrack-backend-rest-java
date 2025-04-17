@@ -1,6 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
-public enum Departamento {
+public enum DepartamentoType {
     ENTRADA("Entrada"),
     AVALIACAO("Avaliação"),
     MANUTENCAO("Manutenção"),
@@ -9,7 +9,7 @@ public enum Departamento {
 
     private String descricao;
 
-    Departamento(String descricao) {
+    DepartamentoType(String descricao) {
         this.descricao = descricao;
     }
 

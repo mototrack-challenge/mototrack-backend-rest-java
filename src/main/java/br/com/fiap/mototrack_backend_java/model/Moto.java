@@ -59,11 +59,11 @@ public class Moto {
         this.modelo = modelo;
     }
 
-    public Status getStatus() {
+    public StatusType getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(StatusType status) {
         this.status = status;
     }
 
