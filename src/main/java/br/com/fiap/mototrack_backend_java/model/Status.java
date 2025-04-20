@@ -25,7 +25,8 @@ public class Status {
     public Status() {
     }
 
-    public Status(String descricao) {
+    public Status(StatusType tipo, String descricao) {
+        this.tipo = tipo;
         this.descricao = descricao;
     }
 
