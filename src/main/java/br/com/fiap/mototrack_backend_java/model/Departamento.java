@@ -25,8 +25,9 @@ public class Departamento {
     public Departamento() {
     }
 
-    public Departamento(String nome) {
+    public Departamento(String nome, DepartamentoType tipo) {
         this.nome = nome;
+        this.tipo = tipo;
     }
 
     public Long getId() {
