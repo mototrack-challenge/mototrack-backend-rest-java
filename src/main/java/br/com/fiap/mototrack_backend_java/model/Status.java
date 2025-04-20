@@ -15,6 +15,10 @@ public class Status {
     @Column(nullable = false, length = 100)
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private StatusType tipo;
+
     @OneToMany(mappedBy = "status")
     private List<Moto> motos;
 
@@ -39,6 +43,14 @@ public class Status {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public StatusType getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(StatusType tipo) {
+        this.tipo = tipo;
     }
 
     public List<Moto> getMotos() {

@@ -15,6 +15,10 @@ public class Departamento {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private DepartamentoType tipo;
+
     @OneToMany(mappedBy = "departamento")
     private List<Movimentacao> movimentacoes;
 
@@ -39,6 +43,14 @@ public class Departamento {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public DepartamentoType getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(DepartamentoType tipo) {
+        this.tipo = tipo;
     }
 
     public List<Movimentacao> getMovimentacoes() {
