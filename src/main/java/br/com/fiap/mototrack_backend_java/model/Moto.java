@@ -18,7 +18,7 @@ public class Moto {
     @Column(nullable = false, length = 100)
     private String modelo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "status_id")
     private Status status;
 

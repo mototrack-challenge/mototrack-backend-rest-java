@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -17,9 +18,10 @@ public class Movimentacao {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moto_id")
+    @JsonIgnore
     private Moto moto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 

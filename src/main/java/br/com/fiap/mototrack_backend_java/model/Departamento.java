@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class Departamento {
     private DepartamentoType tipo;
 
     @OneToMany(mappedBy = "departamento")
+    @JsonIgnore
     private List<Movimentacao> movimentacoes;
 
     public Departamento() {

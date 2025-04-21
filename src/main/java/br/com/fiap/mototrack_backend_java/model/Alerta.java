@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class Alerta {
 
     @ManyToOne
     @JoinColumn(name = "moto_id")
+    @JsonIgnore
     private Moto moto;
 
     public Alerta() {
