@@ -1,5 +1,7 @@
 package br.com.fiap.mototrack_backend_java.dto;
 
+import java.util.List;
+
 public class MotoDTO {
     private Long id;
     private String placa;

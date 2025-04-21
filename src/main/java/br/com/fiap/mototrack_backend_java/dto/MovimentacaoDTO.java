@@ -1,5 +1,7 @@
 package br.com.fiap.mototrack_backend_java.dto;
 
+import java.time.LocalDateTime;
+
 public class MovimentacaoDTO {
     private Long id;
     private LocalDateTime timestamp;
