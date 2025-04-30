@@ -1,15 +1,20 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@JsonPropertyOrder({ "id_moto", "placa", "modelo", "status", "movimentacoes", "alertas" })
 @Entity
 @Table(name = "mt_motos")
 public class Moto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_moto")
+    @JsonProperty("id_moto")
     private Long id;
 
     @Column(nullable = false, length = 7)
