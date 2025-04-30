@@ -3,11 +3,15 @@ package br.com.fiap.mototrack_backend_java.dto;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.model.Status;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.*;
 
 import java.util.List;
 
+@JsonPropertyOrder({ "id_moto", "placa", "modelo", "status", "movimentacoes", "alertas" })
 public class MotoDTO {
+    @JsonProperty("id_moto")
     private Long id;
 
     @NotBlank

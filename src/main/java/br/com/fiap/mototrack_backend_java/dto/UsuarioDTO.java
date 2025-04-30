@@ -1,9 +1,13 @@
 package br.com.fiap.mototrack_backend_java.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
+@JsonPropertyOrder({ "id_usuario", "nome", "email", "senha", "dataCriacao" })
 public class UsuarioDTO {
+    @JsonProperty("id_usuario")
     private Long id;
 
     @NotBlank(message = "O nome é obrigatório")
