@@ -14,14 +14,15 @@ public class MotoDTO {
     @JsonProperty("id_moto")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "A placa da moto é obrigatória")
     @Size(min = 7, max = 7)
     private String placa;
 
-    @NotBlank
+    @NotBlank(message = "O modelo da moto é obrigatório")
     @Size(max = 100)
     private String modelo;
 
+    @NotBlank(message = "O status da moto é obrigatóriao")
     private Status status;
 
     private List<Movimentacao> movimentacoes;

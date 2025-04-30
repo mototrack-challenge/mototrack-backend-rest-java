@@ -13,7 +13,7 @@ public class AlertaDTO {
     @JsonProperty("id_alerta")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "A mensagem do alerta é obrigatória")
     @Size(max = 200)
     private String mensagem;
 
