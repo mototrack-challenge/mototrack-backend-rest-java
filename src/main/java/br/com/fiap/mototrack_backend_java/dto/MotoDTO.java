@@ -22,7 +22,7 @@ public class MotoDTO {
     @Size(max = 100)
     private String modelo;
 
-    @NotBlank(message = "O status da moto é obrigatóriao")
+    @NotNull(message = "O status é obrigatório")
     private Status status;
 
     private List<Movimentacao> movimentacoes;
