@@ -46,7 +46,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /usuarios/salvar`  
   Cadastra um novo usuário.
 
-```json
+```jsonc
 {
   "nome": "João Silva",
   "email": "joao@example.com",
@@ -63,7 +63,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /usuarios/atualizar/{id}`  
   Atualiza os dados do usuário com este id.
 
-```json
+```jsonc
 {
   "id_usuario": 1,
   "nome": "João da Silva", // alterando o nome
@@ -82,7 +82,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /motos/salvar`  
   Cadastra uma nova moto.
 
-```json
+```jsonc
 {
   "placa": "ABC1234",
   "modelo": "Mottu-E",
@@ -101,7 +101,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /motos/atualizar/{id}`  
   Atualiza os dados da moto com este id.
 
-```json
+```jsonc
 {
     "id_moto": 1,
     "placa": "ABC1245", // alterando placa
@@ -122,7 +122,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /movimentacoes/salvar`  
   Cadastra uma nova movimentação.
 
-```json
+```jsonc
 {
   "moto": {
     "id_moto": 1
@@ -142,7 +142,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /movimentacoes/atualizar/{id}`  
   Atualiza os dados da movimentação com este id.
 
-```json
+```jsonc
 {
     "id_movimentacao": 1,
     "timestamp": "2025-05-04T17:49:02.237146",
@@ -165,7 +165,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /status/salvar`  
   Cadastra um novo status.
 
-```json
+```jsonc
 {
   "descricao": "Este status é que a moto está em avaliação",
   "tipo": "AVALIACAO"
@@ -181,7 +181,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /status/atualizar/{id}`  
   Atualiza os dados do status com este id.
 
-```json
+```jsonc
 {
     "id_status": 1,
     "tipo": "EM_MANUTENCAO", // alterando o tipo
@@ -199,7 +199,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /departamentos/salvar`  
   Cadastra um novo departamento.
 
-```json
+```jsonc
 {
   "nome": "Departamento de Entrada",
   "tipo": "ENTRADA"
@@ -215,7 +215,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /departamentos/atualizar/{id}`  
   Atualiza os dados do departamento com este id.
 
-```json
+```jsonc
 {
     "id_departamento": 1,
     "nome": "Departamento de Avaliação", // alterando o nome do departamento
@@ -233,7 +233,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `POST - /alertas/salvar`  
   Cadastra um novo alerta.
 
-```json
+```jsonc
 {
   "mensagem": "Moto com o motor gravemente danificado.",
   "moto": {
@@ -251,7 +251,7 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `PUT - /alertas/atualizar/{id}`  
   Atualiza os dados do alerta com este id.
 
-```json
+```jsonc
 {
     "id_alerta": 1,
     "mensagem": "Moto com os pneus furados.", // alterando a mensagem
