@@ -42,7 +42,9 @@ public class MotoController {
 
     @PutMapping("/atualizar/{id}")
     public MotoDTO atualizar(@PathVariable Long id, @RequestBody @Valid MotoDTO dto) {
-        return MotoMapper.toDTO((service.atualizar(id, MotoMapper.toEntity(dto))));
+        Moto moto = MotoMapper.toEntity(dto);
+        moto.setId(id);
+        return MotoMapper.toDTO(service.atualizar(id,moto));
     }
 
     @DeleteMapping("/deletar/{id}")

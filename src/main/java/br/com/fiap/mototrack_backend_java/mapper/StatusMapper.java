@@ -19,7 +19,6 @@ public class StatusMapper {
         if (dto == null) return null;
 
         Status status = new Status();
-        status.setId(dto.getId());
         status.setDescricao(dto.getDescricao());
         status.setTipo(dto.getTipo());
 

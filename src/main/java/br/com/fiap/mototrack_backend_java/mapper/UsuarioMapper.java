@@ -20,7 +20,6 @@ public class UsuarioMapper {
         if (dto == null) return null;
 
         Usuario usuario = new Usuario();
-        usuario.setId(dto.getId());
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(dto.getSenha());

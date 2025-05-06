@@ -34,7 +34,6 @@ public class MovimentacaoMapper {
         if (dto == null) return null;
 
         Movimentacao movimentacao = new Movimentacao();
-        movimentacao.setId(dto.getId());
         movimentacao.setTimestamp(dto.getTimestamp());
 
         if (dto.getMoto() != null) {

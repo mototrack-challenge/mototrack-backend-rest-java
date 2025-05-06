@@ -2,6 +2,7 @@ package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.MovimentacaoDTO;
 import br.com.fiap.mototrack_backend_java.mapper.MovimentacaoMapper;
+import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.service.MovimentacaoService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,9 @@ public class MovimentacaoController {
 
     @PutMapping("/atualizar/{id}")
     public MovimentacaoDTO atualizar(@PathVariable Long id, @RequestBody @Valid MovimentacaoDTO dto) {
-        return MovimentacaoMapper.toDTO(service.atualizar(id, MovimentacaoMapper.toEntity(dto)));
+        Movimentacao movimentacao = MovimentacaoMapper.toEntity(dto);
+        movimentacao.setId(id);
+        return MovimentacaoMapper.toDTO(service.atualizar(id,movimentacao));
     }
 
     @DeleteMapping("/deletar/{id}")

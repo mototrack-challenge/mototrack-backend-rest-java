@@ -4,6 +4,7 @@ import br.com.fiap.mototrack_backend_java.dto.DepartamentoDTO;
 import br.com.fiap.mototrack_backend_java.dto.StatusDTO;
 import br.com.fiap.mototrack_backend_java.mapper.DepartamentoMapper;
 import br.com.fiap.mototrack_backend_java.mapper.StatusMapper;
+import br.com.fiap.mototrack_backend_java.model.Status;
 import br.com.fiap.mototrack_backend_java.service.StatusService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,9 @@ public class StatusController {
 
     @PutMapping("/atualizar/{id}")
     public StatusDTO atualizar(@PathVariable Long id, @RequestBody @Valid StatusDTO dto) {
-        return StatusMapper.toDTO(service.atualizar(id, StatusMapper.toEntity(dto)));
+        Status status = StatusMapper.toEntity(dto);
+        status.setId(id);
+        return StatusMapper.toDTO(service.atualizar(id,status));
     }
 
     @DeleteMapping("/deletar/{id}")

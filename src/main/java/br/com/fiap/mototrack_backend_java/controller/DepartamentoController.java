@@ -40,7 +40,9 @@ public class DepartamentoController {
 
     @PutMapping("/atualizar/{id}")
     public DepartamentoDTO atualizar(@PathVariable Long id, @RequestBody @Valid DepartamentoDTO dto) {
-        return DepartamentoMapper.toDTO(service.atualizar(id, DepartamentoMapper.toEntity(dto)));
+        Departamento departamento = DepartamentoMapper.toEntity(dto);
+        departamento.setId(id);
+        return DepartamentoMapper.toDTO(service.atualizar(id,departamento));
     }
 
     @DeleteMapping("/deletar/{id}")

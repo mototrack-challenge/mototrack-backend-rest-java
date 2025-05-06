@@ -27,7 +27,6 @@ public class AlertaMapper {
         if (dto == null) return null;
 
         Alerta alerta = new Alerta();
-        alerta.setId(dto.getId());
         alerta.setMensagem(dto.getMensagem());
         alerta.setDataAlerta(dto.getDataAlerta());
 

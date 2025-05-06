@@ -19,7 +19,6 @@ public class DepartamentoMapper {
         if (dto == null) return null;
 
         Departamento departamento = new Departamento();
-        departamento.setId(dto.getId());
         departamento.setNome(dto.getNome());
         departamento.setTipo(dto.getTipo());
 

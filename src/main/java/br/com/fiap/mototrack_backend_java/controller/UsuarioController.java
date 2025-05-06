@@ -40,7 +40,9 @@ public class UsuarioController {
 
     @PutMapping("/atualizar/{id}")
     public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioDTO dto) {
-        return UsuarioMapper.toDTO(service.atualizar(id, UsuarioMapper.toEntity(dto)));
+        Usuario usuario = UsuarioMapper.toEntity(dto);
+        usuario.setId(id);
+        return UsuarioMapper.toDTO(service.atualizar(id,usuario));
     }
 
     @DeleteMapping("/deletar/{id}")

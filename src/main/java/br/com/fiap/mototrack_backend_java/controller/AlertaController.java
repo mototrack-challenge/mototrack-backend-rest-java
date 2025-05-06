@@ -40,7 +40,9 @@ public class AlertaController {
 
     @PutMapping("/atualizar/{id}")
     public AlertaDTO atualizar(@PathVariable Long id, @RequestBody @Valid AlertaDTO dto) {
-        return AlertaMapper.toDTO(service.atualizar(id, AlertaMapper.toEntity(dto)));
+        Alerta alerta = AlertaMapper.toEntity(dto);
+        alerta.setId(id);
+        return AlertaMapper.toDTO(service.atualizar(id,alerta));
     }
 
     @DeleteMapping("/deletar/{id}")

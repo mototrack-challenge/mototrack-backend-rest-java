@@ -21,7 +21,6 @@ public class MotoMapper {
         if (dto == null) return null;
 
         Moto moto = new Moto();
-        moto.setId(dto.getId());
         moto.setPlaca(dto.getPlaca());
         moto.setModelo(dto.getModelo());
         moto.setStatus(dto.getStatus());
