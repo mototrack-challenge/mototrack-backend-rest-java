@@ -65,7 +65,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-  "id_usuario": 1,
   "nome": "João da Silva", // alterando o nome
   "email": "joao@example.com",
   "senha": "senha123456" // alterando a senha
@@ -103,7 +102,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-    "id_moto": 1,
     "placa": "ABC1245", // alterando placa
     "modelo": "Mottu-E",
     "status": {
@@ -144,7 +142,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-    "id_movimentacao": 1,
     "timestamp": "2025-05-04T17:49:02.237146",
     "departamento": {
         "id_departamento": 3 // alterando o departamento
@@ -183,7 +180,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-    "id_status": 1,
     "tipo": "EM_MANUTENCAO", // alterando o tipo
     "descricao": "Este status é que a moto está em manutenção" // alterando a descricao
 }
@@ -217,7 +213,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-    "id_departamento": 1,
     "nome": "Departamento de Avaliação", // alterando o nome do departamento
     "tipo": "AVALIACAO" // alterando o tipo do departamento
 }
@@ -253,7 +248,6 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 
 ```jsonc
 {
-    "id_alerta": 1,
     "mensagem": "Moto com os pneus furados.", // alterando a mensagem
     "dataAlerta": "2025-05-04T17:52:06.871938",
     "moto": {
