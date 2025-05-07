@@ -13,7 +13,8 @@ import java.util.List;
 public class Status {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "status_seq")
+    @SequenceGenerator(name = "status_seq", sequenceName = "STATUS_SEQ", allocationSize = 1)
     @Column(name = "id_status")
     @JsonProperty("id_status")
     private Long id;

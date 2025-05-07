@@ -13,7 +13,8 @@ import java.util.List;
 public class Departamento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departamento_seq")
+    @SequenceGenerator(name = "departamento_seq", sequenceName = "DEPARTAMENTO_SEQ", allocationSize = 1)
     @Column(name = "id_departamento")
     @JsonProperty("id_departamento")
     private Long id;

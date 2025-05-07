@@ -12,7 +12,8 @@ import java.util.List;
 public class Moto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "moto_seq")
+    @SequenceGenerator(name = "moto_seq", sequenceName = "MOTO_SEQ", allocationSize = 1)
     @Column(name = "id_moto")
     @JsonProperty("id_moto")
     private Long id;

@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 public class Movimentacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movimentacao_seq")
+    @SequenceGenerator(name = "movimentacao_seq", sequenceName = "MOVIMENTACAO_SEQ", allocationSize = 1)
     @Column(name = "id_movimentacao")
     @JsonProperty("id_movimentacao")
     private Long id;
