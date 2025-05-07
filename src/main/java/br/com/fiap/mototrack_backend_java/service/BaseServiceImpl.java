@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.service;
 
+import br.com.fiap.mototrack_backend_java.exception.ResourceNotFoundException;
 import br.com.fiap.mototrack_backend_java.interfaces.IBaseService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -20,7 +21,8 @@ public abstract class BaseServiceImpl<T, ID, R extends JpaRepository<T, ID>> imp
 
     @Override
     public T buscarPorId(ID id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Objeto com ID " + id + " não encontrado."));
     }
 
     @Override
@@ -33,7 +35,7 @@ public abstract class BaseServiceImpl<T, ID, R extends JpaRepository<T, ID>> imp
         if (repository.existsById(id)) {
             return repository.save(entity);
         }
-        return null;
+        throw new ResourceNotFoundException("Não é possível atualizar. Objeto com ID " + id + " não encontrado.");
     }
 
     @Override
@@ -42,6 +44,6 @@ public abstract class BaseServiceImpl<T, ID, R extends JpaRepository<T, ID>> imp
             repository.deleteById(id);
             return "Objeto deletado com sucesso!";
         }
-        return "Objeto não encontrado.";
+        throw new ResourceNotFoundException("Não é possível deletar. Objeto com ID " + id + " não encontrado.");
     }
 }
