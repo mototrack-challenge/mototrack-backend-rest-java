@@ -18,7 +18,7 @@ public class Moto {
     @JsonProperty("id_moto")
     private Long id;
 
-    @Column(nullable = false, length = 7)
+    @Column(nullable = false, length = 7, unique = true)
     private String placa;
 
     @Column(nullable = false, length = 100)
