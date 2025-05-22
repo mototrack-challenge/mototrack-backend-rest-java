@@ -33,6 +33,7 @@ public class Moto {
     private List<Movimentacao> movimentacoes;
 
     @OneToMany(mappedBy = "moto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("dataAlerta ASC")
     private List<Alerta> alertas;
 
     public Moto() {
