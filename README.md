@@ -57,8 +57,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /usuarios/listar/todos`  
   Lista todas os usuários cadastrados.
 
+![GET usuarios](images/usuarios-get.png)
+
 - `GET BY ID - /usuarios/listar/{id}`  
   Lista o usuário cadastrado com este id.
+
+![GET ID usuarios](images/usuarios-get-id.png)
 
 - `PUT - /usuarios/atualizar/{id}`  
   Atualiza os dados do usuário com este id.
@@ -94,8 +98,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /motos/listar/todos`  
   Lista todas as motos cadastradas.
 
+![GET motos](images/motos-get.png)
+
 - `GET BY ID - /motos/listar/{id}`  
   Lista a moto cadastrada com este id.
+
+![GET ID motos](images/motos-get-id.png)
 
 - `PUT - /motos/atualizar/{id}`  
   Atualiza os dados da moto com este id.
@@ -134,8 +142,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /movimentacoes/listar/todos`  
   Lista todas as movimentações cadastradas.
 
+![GET movimentacoes](images/movimentacoes-get.png)
+
 - `GET BY ID - /movimentacoes/listar/{id}`  
   Lista a movimentação cadastrada com este id.
+
+![GET ID movimentacoes](images/movimentacoes-get-id.png)
 
 - `PUT - /movimentacoes/atualizar/{id}`  
   Atualiza os dados da movimentação com este id.
@@ -172,8 +184,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /status/listar/todos`  
   Lista todos os status cadastrados.
 
+![GET status](images/status-get.png)
+
 - `GET BY ID - /status/listar/{id}`  
   Lista o status cadastrado com este id.
+
+![GET ID status](images/status-get-id.png)
 
 - `PUT - /status/atualizar/{id}`  
   Atualiza os dados do status com este id.
@@ -205,8 +221,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /departamentos/listar/todos`  
   Lista todos os departamentos cadastrados.
 
+![GET departamentos](images/departamentos-get.png)
+
 - `GET BY ID - /departamentos/listar/{id}`  
   Lista o departamento com este id.
+
+![GET ID departamentos](images/departamentos-get-id.png)
 
 - `PUT - /departamentos/atualizar/{id}`  
   Atualiza os dados do departamento com este id.
@@ -240,8 +260,12 @@ Abaixo estão listados os principais endpoints da API do MotoTrack, divididos po
 - `GET - /alertas/listar/todos`  
   Lista todos os alertas cadastrados.
 
+![GET alertas](images/alertas-get.png)
+
 - `GET BY ID - /alertas/listar/{id}`  
   Lista o alerta com este id.
+
+![GET ID alertas](images/alertas-get-id.png)
 
 - `PUT - /alertas/atualizar/{id}`  
   Atualiza os dados do alerta com este id.
