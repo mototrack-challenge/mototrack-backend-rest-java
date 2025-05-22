@@ -29,6 +29,7 @@ public class Moto {
     private Status status;
 
     @OneToMany(mappedBy = "moto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("timestamp ASC")
     private List<Movimentacao> movimentacoes;
 
     @OneToMany(mappedBy = "moto", cascade = CascadeType.ALL, orphanRemoval = true)
