@@ -1,9 +1,7 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.MotoDTO;
-import br.com.fiap.mototrack_backend_java.dto.UsuarioDTO;
 import br.com.fiap.mototrack_backend_java.mapper.MotoMapper;
-import br.com.fiap.mototrack_backend_java.mapper.UsuarioMapper;
 import br.com.fiap.mototrack_backend_java.model.Moto;
 import br.com.fiap.mototrack_backend_java.service.MotoService;
 import jakarta.validation.Valid;

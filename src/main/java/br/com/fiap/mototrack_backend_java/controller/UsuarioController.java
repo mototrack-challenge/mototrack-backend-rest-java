@@ -1,6 +1,5 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.UsuarioDTO;
 import br.com.fiap.mototrack_backend_java.mapper.UsuarioMapper;
 import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.service.UsuarioService;

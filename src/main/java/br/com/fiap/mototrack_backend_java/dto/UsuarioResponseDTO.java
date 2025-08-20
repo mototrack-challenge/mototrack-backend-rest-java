@@ -1,0 +1,23 @@
+package br.com.fiap.mototrack_backend_java.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UsuarioResponseDTO {
+
+    @JsonProperty("id_usuario")
+    private Long id;
+
+    private String nome;
+
+    private String email;
+
+    private String senha;
+
+    @JsonProperty("data_criacao")
+    private LocalDateTime dataCriacao;
+}
