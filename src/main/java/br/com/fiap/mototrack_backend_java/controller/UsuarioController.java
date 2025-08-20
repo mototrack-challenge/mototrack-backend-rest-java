@@ -1,51 +1,51 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.mapper.UsuarioMapper;
-import br.com.fiap.mototrack_backend_java.model.Usuario;
+import br.com.fiap.mototrack_backend_java.dto.UsuarioRequestDTO;
+import br.com.fiap.mototrack_backend_java.dto.UsuarioResponseDTO;
 import br.com.fiap.mototrack_backend_java.service.UsuarioService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private final UsuarioService service;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public UsuarioController(UsuarioService service) {
-        this.service = service;
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
+        var usuarios = usuarioService.listarTodos();
+        return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/listar/todos")
-    public List<UsuarioDTO> listarTodos() {
-        return service.listarTodos()
-                .stream()
-                .map(UsuarioMapper::toDTO)
-                .collect(Collectors.toList());
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
+        var usuario = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuario);
     }
 
-    @GetMapping("/listar/{id}")
-    public UsuarioDTO buscarPorId(@PathVariable Long id) {
-        return UsuarioMapper.toDTO(service.buscarPorId(id));
+    @PostMapping
+    public ResponseEntity<UsuarioResponseDTO> salvar(@RequestBody @Valid UsuarioRequestDTO usuarioDTO, UriComponentsBuilder uriBuilder) {
+        var usuario = usuarioService.salvar(usuarioDTO);
+
+        var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuario);
     }
 
-    @PostMapping("/salvar")
-    public UsuarioDTO salvar(@RequestBody @Valid UsuarioDTO dto) {
-        return UsuarioMapper.toDTO(service.salvar(UsuarioMapper.toEntity(dto)));
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioRequestDTO usuarioDTO) {
+        var usuarioAtualizado = usuarioService.atualizar(id, usuarioDTO);
+        return ResponseEntity.ok(usuarioAtualizado);
     }
 
-    @PutMapping("/atualizar/{id}")
-    public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioDTO dto) {
-        Usuario usuario = UsuarioMapper.toEntity(dto);
-        usuario.setId(id);
-        return UsuarioMapper.toDTO(service.atualizar(id,usuario));
-    }
-
-    @DeleteMapping("/deletar/{id}")
-    public String deletar(@PathVariable Long id) {
-        return service.deletar(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        usuarioService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

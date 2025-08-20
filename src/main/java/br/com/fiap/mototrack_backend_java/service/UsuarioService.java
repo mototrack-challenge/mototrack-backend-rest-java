@@ -8,6 +8,7 @@ import br.com.fiap.mototrack_backend_java.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Transactional(readOnly = true)
     public List<UsuarioResponseDTO> listarTodos() {
         return usuarioRepository.findAll()
                 .stream()
@@ -25,16 +27,19 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public UsuarioResponseDTO buscarPorId(Long id) {
         var usuario = buscarEntidadeUsuarioPorId(id);
         return UsuarioMapper.toResponseDTO(usuario);
     }
 
+    @Transactional
     public UsuarioResponseDTO salvar(UsuarioRequestDTO usuarioRequestDTO) {
         var usuario = usuarioRepository.save(UsuarioMapper.toEntity(usuarioRequestDTO));
         return UsuarioMapper.toResponseDTO(usuario);
     }
 
+    @Transactional
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO usuarioRequestDTO) {
         var usuarioAtual = buscarEntidadeUsuarioPorId(id);
 
@@ -47,6 +52,7 @@ public class UsuarioService {
         return UsuarioMapper.toResponseDTO(usuarioAtualizado);
     }
 
+    @Transactional
     public void deletar(Long id) {
         var usuario = buscarEntidadeUsuarioPorId(id);
         usuarioRepository.delete(usuario);

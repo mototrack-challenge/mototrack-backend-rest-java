@@ -2,12 +2,14 @@ package br.com.fiap.mototrack_backend_java.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioResponseDTO {
+public class UsuarioResponseDTO extends RepresentationModel<UsuarioResponseDTO> {
 
     @JsonProperty("id_usuario")
     private Long id;
