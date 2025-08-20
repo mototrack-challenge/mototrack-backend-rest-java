@@ -1,10 +1,7 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.DepartamentoDTO;
 import br.com.fiap.mototrack_backend_java.dto.StatusDTO;
-import br.com.fiap.mototrack_backend_java.mapper.DepartamentoMapper;
 import br.com.fiap.mototrack_backend_java.mapper.StatusMapper;
-import br.com.fiap.mototrack_backend_java.model.Status;
 import br.com.fiap.mototrack_backend_java.service.StatusService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

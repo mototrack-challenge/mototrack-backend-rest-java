@@ -1,7 +1,6 @@
 package br.com.fiap.mototrack_backend_java.mapper;
 
 import br.com.fiap.mototrack_backend_java.dto.StatusDTO;
-import br.com.fiap.mototrack_backend_java.model.Status;
 
 public class StatusMapper {
 

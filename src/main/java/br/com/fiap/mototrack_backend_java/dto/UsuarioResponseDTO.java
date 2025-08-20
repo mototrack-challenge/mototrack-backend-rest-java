@@ -5,9 +5,10 @@ import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioResponseDTO extends RepresentationModel<UsuarioResponseDTO> {
 
     @JsonProperty("id_usuario")

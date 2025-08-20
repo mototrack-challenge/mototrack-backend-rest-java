@@ -1,13 +1,13 @@
-package br.com.fiap.mototrack_backend_java.model;
+package br.com.fiap.mototrack_backend_java.model.enums;
 
-public enum StatusType {
+public enum Status {
     EM_MANUTENCAO("Em Manutenção"),
     PRONTA_PARA_USO("Pronta para Uso"),
     AVALIACAO("Em Avaliação");
 
     private String descricao;
 
-    StatusType(String descricao) {
+    Status(String descricao) {
         this.descricao = descricao;
     }
 

@@ -1,6 +1,6 @@
 package br.com.fiap.mototrack_backend_java.dto;
 
-import br.com.fiap.mototrack_backend_java.model.StatusType;
+import br.com.fiap.mototrack_backend_java.model.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.NotBlank;
@@ -16,12 +16,12 @@ public class StatusDTO {
     private String descricao;
 
     @NotNull(message = "O tipo de status é obrigatório")
-    private StatusType tipo;
+    private Status tipo;
 
     public StatusDTO() {
     }
 
-    public StatusDTO(Long id, String descricao, StatusType tipo) {
+    public StatusDTO(Long id, String descricao, Status tipo) {
         this.id = id;
         this.descricao = descricao;
         this.tipo = tipo;
@@ -43,11 +43,11 @@ public class StatusDTO {
         this.descricao = descricao;
     }
 
-    public StatusType getTipo() {
+    public Status getTipo() {
         return tipo;
     }
 
-    public void setTipo(StatusType tipo) {
+    public void setTipo(Status tipo) {
         this.tipo = tipo;
     }
 }

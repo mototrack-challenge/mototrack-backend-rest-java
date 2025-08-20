@@ -1,5 +1,6 @@
 package br.com.fiap.mototrack_backend_java.model;
 
+import br.com.fiap.mototrack_backend_java.model.enums.DepartamentoType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
