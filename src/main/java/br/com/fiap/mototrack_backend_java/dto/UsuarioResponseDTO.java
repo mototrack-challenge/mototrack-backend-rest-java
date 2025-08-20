@@ -3,7 +3,6 @@ package br.com.fiap.mototrack_backend_java.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-
 import java.time.LocalDateTime;
 
 @Data
