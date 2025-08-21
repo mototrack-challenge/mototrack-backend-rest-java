@@ -1,50 +1,79 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
+import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
+import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
+import br.com.fiap.mototrack_backend_java.dto.MovimentacaoRequestDTO;
+import br.com.fiap.mototrack_backend_java.dto.MovimentacaoResponseDTO;
 import br.com.fiap.mototrack_backend_java.mapper.MovimentacaoMapper;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.service.MovimentacaoService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/movimentacoes")
 public class MovimentacaoController {
 
-    private final MovimentacaoService service;
+    @Autowired
+    private MovimentacaoService movimentacaoService;
 
-    public MovimentacaoController(MovimentacaoService service) {
-        this.service = service;
+    @GetMapping
+    public ResponseEntity<Page<MovimentacaoResponseDTO>> listarTodos(
+            @PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
+        var movimentacoes = movimentacaoService.listarTodos(paginacao);
+        movimentacoes.forEach(this::adicionarLinks);
+
+        return ResponseEntity.ok(movimentacoes);
     }
 
-    @GetMapping("/listar/todos")
-    public List<MovimentacaoDTO> listarTodos() {
-        return service.listarTodos()
-                .stream()
-                .map(MovimentacaoMapper::toDTO)
-                .collect(Collectors.toList());
+    @GetMapping("/{id}")
+    public ResponseEntity<MovimentacaoResponseDTO> buscarPorId(@PathVariable Long id) {
+        var movimentacao = movimentacaoService.buscarPorId(id);
+        adicionarLinks(movimentacao);
+
+        return ResponseEntity.ok(movimentacao);
     }
 
-    @GetMapping("/listar/{id}")
-    public MovimentacaoDTO buscarPorId(@PathVariable Long id) {
-        return MovimentacaoMapper.toDTO(service.buscarPorId(id));
+    @PostMapping
+    public ResponseEntity<MovimentacaoResponseDTO> salvar(@RequestBody @Valid MovimentacaoRequestDTO movimentacaoRequestDTO, UriComponentsBuilder uriBuilder) {
+        var movimentacao = movimentacaoService.salvar(movimentacaoRequestDTO);
+        adicionarLinks(movimentacao);
+
+        var uri = uriBuilder.path("/movimentacoes/{id}").buildAndExpand(movimentacao.getId()).toUri();
+        return ResponseEntity.created(uri).body(movimentacao);
     }
 
-    @PostMapping("/salvar")
-    public MovimentacaoDTO salvar(@RequestBody @Valid MovimentacaoDTO dto) {
-        return MovimentacaoMapper.toDTO(service.salvar(MovimentacaoMapper.toEntity(dto)));
+    @PutMapping("/{id}")
+    public ResponseEntity<MovimentacaoResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid MovimentacaoRequestDTO movimentacaoRequestDTO) {
+        var movimentacaoAtualizada = movimentacaoService.atualizar(id, movimentacaoRequestDTO);
+        adicionarLinks(movimentacaoAtualizada);
+
+        return ResponseEntity.ok(movimentacaoAtualizada);
     }
 
-    @PutMapping("/atualizar/{id}")
-    public MovimentacaoDTO atualizar(@PathVariable Long id, @RequestBody @Valid MovimentacaoDTO dto) {
-        Movimentacao movimentacao = MovimentacaoMapper.toEntity(dto);
-        movimentacao.setId(id);
-        return MovimentacaoMapper.toDTO(service.atualizar(id,movimentacao));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        movimentacaoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public String deletar(@PathVariable Long id) {
-        return service.deletar(id);
+    private MovimentacaoResponseDTO adicionarLinks(MovimentacaoResponseDTO movimentacao) {
+        movimentacao.add(linkTo(methodOn(MovimentacaoController.class).buscarPorId(movimentacao.getId())).withRel("self"));
+        movimentacao.add(linkTo(methodOn(MovimentacaoController.class).atualizar(movimentacao.getId(), null)).withRel("update"));
+        movimentacao.add(linkTo(methodOn(MovimentacaoController.class).deletar(movimentacao.getId())).withRel("delete"));
+
+        return movimentacao;
     }
 }
