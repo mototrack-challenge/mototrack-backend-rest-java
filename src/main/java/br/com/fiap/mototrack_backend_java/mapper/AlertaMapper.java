@@ -1,7 +1,6 @@
 package br.com.fiap.mototrack_backend_java.mapper;
 
 import br.com.fiap.mototrack_backend_java.dto.AlertaDTO;
-import br.com.fiap.mototrack_backend_java.dto.MotoResumoDTO;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.model.Moto;
 

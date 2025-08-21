@@ -1,6 +1,5 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.MovimentacaoDTO;
 import br.com.fiap.mototrack_backend_java.mapper.MovimentacaoMapper;
 import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.service.MovimentacaoService;
