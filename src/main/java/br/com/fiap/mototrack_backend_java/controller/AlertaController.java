@@ -1,52 +1,76 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.AlertaDTO;
+import br.com.fiap.mototrack_backend_java.dto.*;
 import br.com.fiap.mototrack_backend_java.mapper.AlertaMapper;
 import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.service.AlertaService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/alertas")
 public class AlertaController {
 
-    private final AlertaService service;
+    @Autowired
+    private AlertaService alertaService;
 
-    public AlertaController(AlertaService service) {
-        this.service = service;
+    @GetMapping
+    public ResponseEntity<Page<AlertaResponseDTO>> listarTodos(
+            @PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
+        var alertas = alertaService.listarTodos(paginacao);
+        alertas.forEach(this::adicionarLinks);
+
+        return ResponseEntity.ok(alertas);
     }
 
-    @GetMapping("/listar/todos")
-    public List<AlertaDTO> lisarTodos() {
-        return service.listarTodos()
-                .stream()
-                .map(AlertaMapper::toDTO)
-                .collect(Collectors.toList());
+    @GetMapping("/{id}")
+    public ResponseEntity<AlertaResponseDTO> buscarPorId(@PathVariable Long id) {
+        var alerta = alertaService.buscarPorId(id);
+        adicionarLinks(alerta);
+
+        return ResponseEntity.ok(alerta);
     }
 
-    @GetMapping("/listar/{id}")
-    public AlertaDTO buscarPorId(@PathVariable Long id) {
-        return AlertaMapper.toDTO(service.buscarPorId(id));
+    @PostMapping
+    public ResponseEntity<AlertaResponseDTO> salvar(@RequestBody @Valid AlertaRequestDTO alertaRequestDTO, UriComponentsBuilder uriBuilder) {
+        var alerta = alertaService.salvar(alertaRequestDTO);
+        adicionarLinks(alerta);
+
+        var uri = uriBuilder.path("/alertas/{id}").buildAndExpand(alerta.getId()).toUri();
+        return ResponseEntity.created(uri).body(alerta);
     }
 
-    @PostMapping("/salvar")
-    public AlertaDTO salvar(@RequestBody @Valid AlertaDTO dto) {
-        return AlertaMapper.toDTO(service.salvar(AlertaMapper.toEntity(dto)));
+    @PutMapping("/{id}")
+    public ResponseEntity<AlertaResponseDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AlertaRequestDTO alertaRequestDTO) {
+        var alertaAtualizado = alertaService.atualizar(id, alertaRequestDTO);
+        adicionarLinks(alertaAtualizado);
+
+        return ResponseEntity.ok(alertaAtualizado);
     }
 
-    @PutMapping("/atualizar/{id}")
-    public AlertaDTO atualizar(@PathVariable Long id, @RequestBody @Valid AlertaDTO dto) {
-        Alerta alerta = AlertaMapper.toEntity(dto);
-        alerta.setId(id);
-        return AlertaMapper.toDTO(service.atualizar(id,alerta));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        alertaService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public String deletar(@PathVariable Long id) {
-        return service.deletar(id);
+    private AlertaResponseDTO adicionarLinks(AlertaResponseDTO alerta) {
+        alerta.add(linkTo(methodOn(AlertaController.class).buscarPorId(alerta.getId())).withRel("self"));
+        alerta.add(linkTo(methodOn(AlertaController.class).atualizar(alerta.getId(), null)).withRel("update"));
+        alerta.add(linkTo(methodOn(AlertaController.class).deletar(alerta.getId())).withRel("delete"));
+
+        return alerta;
     }
 }

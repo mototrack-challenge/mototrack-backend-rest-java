@@ -70,9 +70,9 @@ public class DepartamentoController {
     }
 
     private DepartamentoResponseDTO adicionarLinks(DepartamentoResponseDTO departamento) {
-        departamento.add(linkTo(methodOn(MotoController.class).buscarPorId(departamento.getId())).withRel("self"));
-        departamento.add(linkTo(methodOn(MotoController.class).atualizar(departamento.getId(), null)).withRel("update"));
-        departamento.add(linkTo(methodOn(MotoController.class).deletar(departamento.getId())).withRel("delete"));
+        departamento.add(linkTo(methodOn(DepartamentoController.class).buscarPorId(departamento.getId())).withRel("self"));
+        departamento.add(linkTo(methodOn(DepartamentoController.class).atualizar(departamento.getId(), null)).withRel("update"));
+        departamento.add(linkTo(methodOn(DepartamentoController.class).deletar(departamento.getId())).withRel("delete"));
 
         return departamento;
     }
