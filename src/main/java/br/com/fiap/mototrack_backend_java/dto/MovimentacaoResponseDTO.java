@@ -6,13 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovimentacaoResponseDTO {
+public class MovimentacaoResponseDTO extends RepresentationModel<MovimentacaoResponseDTO> {
 
     @JsonProperty("id_movimentacao")
     private Long id;

@@ -1,11 +1,7 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
-import br.com.fiap.mototrack_backend_java.dto.MotoRequestDTO;
-import br.com.fiap.mototrack_backend_java.dto.MotoResponseDTO;
 import br.com.fiap.mototrack_backend_java.dto.MovimentacaoRequestDTO;
 import br.com.fiap.mototrack_backend_java.dto.MovimentacaoResponseDTO;
-import br.com.fiap.mototrack_backend_java.mapper.MovimentacaoMapper;
-import br.com.fiap.mototrack_backend_java.model.Movimentacao;
 import br.com.fiap.mototrack_backend_java.service.MovimentacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
