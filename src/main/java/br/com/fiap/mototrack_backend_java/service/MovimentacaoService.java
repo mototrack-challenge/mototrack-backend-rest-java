@@ -39,7 +39,7 @@ public class MovimentacaoService  {
     @Transactional
     public MovimentacaoResponseDTO salvar(MovimentacaoRequestDTO movimentacaoRequestDTO) {
         var moto = motoService.buscarEntidadeMotoPorId(movimentacaoRequestDTO.getIdMoto());
-        var departamento = departamentoService.buscarEntidadeDepartamentoPorId(movimentacaoRequestDTO.getDepartamento().getId());
+        var departamento = departamentoService.buscarEntidadeDepartamentoPorId(movimentacaoRequestDTO.getIdDepartamento());
         var movimentacao = movimentacaoRepository.save(MovimentacaoMapper.toEntity(movimentacaoRequestDTO, moto, departamento));
         return MovimentacaoMapper.toResponseDTO(movimentacao);
     }
@@ -48,7 +48,7 @@ public class MovimentacaoService  {
     public MovimentacaoResponseDTO atualizar(Long id, MovimentacaoRequestDTO movimentacaoRequestDTO) {
         var movimentacaoAtual = buscarEntidadeMovimentacaoPorId(id);
         var moto = motoService.buscarEntidadeMotoPorId(movimentacaoRequestDTO.getIdMoto());
-        var departamento = departamentoService.buscarEntidadeDepartamentoPorId(movimentacaoRequestDTO.getDepartamento().getId());
+        var departamento = departamentoService.buscarEntidadeDepartamentoPorId(movimentacaoRequestDTO.getIdDepartamento());
 
         movimentacaoAtual.setId(id);
         movimentacaoAtual.setMoto(moto);

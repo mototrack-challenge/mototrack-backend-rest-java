@@ -14,10 +14,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MovimentacaoRequestDTO {
 
-    @JsonProperty("moto_id")
     @NotNull(message = "O id da moto é obrigatório")
+    @JsonProperty("moto_id")
     private Long idMoto;
 
     @NotNull(message = "O departamento da moto é obrigatório")
-    private Departamento departamento;
+    @JsonProperty("departamento_id")
+    private Long idDepartamento;
 }

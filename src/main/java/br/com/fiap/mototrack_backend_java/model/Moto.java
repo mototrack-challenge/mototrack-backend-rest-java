@@ -37,7 +37,7 @@ public class Moto {
     private Status status;
 
     @OneToMany(mappedBy = "moto", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
-    @OrderBy("timestamp ASC")
+    @OrderBy("dataMovimentacao ASC")
     private List<Movimentacao> movimentacoes;
 
     @OneToMany(mappedBy = "moto", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)

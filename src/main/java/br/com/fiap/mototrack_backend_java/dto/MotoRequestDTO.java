@@ -21,8 +21,7 @@ public class MotoRequestDTO {
     @Size(min = 17, max = 17)
     private String chassi;
 
-    @NotBlank(message = "O modelo da moto é obrigatório")
-    @Size(max = 11)
+    @NotNull(message = "O modelo da moto é obrigatório")
     private ModeloMoto modelo;
 
     @NotNull(message = "O status é obrigatório")

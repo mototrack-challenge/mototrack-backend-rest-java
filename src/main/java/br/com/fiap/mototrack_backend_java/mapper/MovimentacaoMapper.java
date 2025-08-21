@@ -15,11 +15,16 @@ public class MovimentacaoMapper {
         Long motoId = movimentacao.getMoto() != null ? movimentacao.getMoto().getId() : null;
         Departamento departamento = movimentacao.getDepartamento();
 
+        Long departamentoId = departamento != null ? departamento.getId() : null;
+        String departamentoDescricao = departamento != null ? departamento.getDescricao() : null;
+
         return new MovimentacaoResponseDTO(
                 movimentacao.getId(),
                 movimentacao.getDataMovimentacao(),
                 motoId,
-                departamento
+                departamentoId,
+                departamentoDescricao
+
         );
     }
 

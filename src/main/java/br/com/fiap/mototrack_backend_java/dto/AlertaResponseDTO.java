@@ -2,6 +2,7 @@ package br.com.fiap.mototrack_backend_java.dto;
 
 import br.com.fiap.mototrack_backend_java.model.enums.TipoGravidade;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id_alerta", "gravidade", "mensagem", "moto_id", "data_alerta", "_links"})
 public class AlertaResponseDTO extends RepresentationModel<AlertaResponseDTO>  {
 
     @JsonProperty("id_alerta")

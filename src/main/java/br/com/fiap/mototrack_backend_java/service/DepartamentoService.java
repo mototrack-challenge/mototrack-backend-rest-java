@@ -42,7 +42,7 @@ public class DepartamentoService {
 
         departamentoAtual.setId(id);
         departamentoAtual.setTipo(departamentoRequestDTO.getTipo());
-        departamentoAtual.setDescricao(departamentoAtual.getDescricao());
+        departamentoAtual.setDescricao(departamentoRequestDTO.getDescricao());
 
         var departamentoAtualizado = departamentoRepository.save(departamentoAtual);
         return DepartamentoMapper.toResponseDTO(departamentoAtualizado);

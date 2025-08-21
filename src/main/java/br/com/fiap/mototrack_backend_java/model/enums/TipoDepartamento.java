@@ -6,5 +6,4 @@ public enum TipoDepartamento {
     MANUTENCAO,
     PRONTA_PARA_USO,
     SAIDA
-
 }

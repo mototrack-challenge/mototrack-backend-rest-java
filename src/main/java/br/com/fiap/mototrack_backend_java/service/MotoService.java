@@ -45,7 +45,7 @@ public class MotoService {
         motoAtual.setPlaca(motoRequestDTO.getPlaca());
         motoAtual.setChassi(motoRequestDTO.getChassi());
         motoAtual.setModelo(motoRequestDTO.getModelo());
-        motoAtual.setStatus(motoAtual.getStatus());
+        motoAtual.setStatus(motoRequestDTO.getStatus());
 
         var motoAtualizada = motoRepository.save(motoAtual);
         return MotoMapper.toResponseDTO(motoAtualizada);
