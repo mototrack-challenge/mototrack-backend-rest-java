@@ -1,8 +1,6 @@
 package br.com.fiap.mototrack_backend_java.controller;
 
 import br.com.fiap.mototrack_backend_java.dto.*;
-import br.com.fiap.mototrack_backend_java.mapper.AlertaMapper;
-import br.com.fiap.mototrack_backend_java.model.Alerta;
 import br.com.fiap.mototrack_backend_java.service.AlertaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -41,6 +36,12 @@ public class AlertaController {
         adicionarLinks(alerta);
 
         return ResponseEntity.ok(alerta);
+    }
+
+    @GetMapping("/moto/{id}")
+    public ResponseEntity<List<AlertaResponseDTO>> listarPorMoto(@PathVariable Long id) {
+        var alertas = alertaService.buscarAlertasPorIdDaMoto(id);
+        return ResponseEntity.ok(alertas);
     }
 
     @PostMapping

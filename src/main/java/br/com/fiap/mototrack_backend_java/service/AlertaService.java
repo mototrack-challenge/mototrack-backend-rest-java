@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AlertaService {
 
@@ -31,6 +33,15 @@ public class AlertaService {
     public AlertaResponseDTO buscarPorId(Long id) {
         var alerta = buscarEntidadeAlertaPorId(id);
         return AlertaMapper.toResponseDTO(alerta);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AlertaResponseDTO> buscarAlertasPorIdDaMoto(Long id) {
+        var moto = motoService.buscarEntidadeMotoPorId(id);
+        var alertas = alertaRepository.findByMotoIdOrderByDataAlertaAsc(moto.getId());
+        return alertas.stream()
+                .map(AlertaMapper::toResponseDTO)
+                .toList();
     }
 
     @Transactional
