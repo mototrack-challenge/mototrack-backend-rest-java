@@ -6,7 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
     Page<Movimentacao> findAllByOrderByIdAsc(Pageable pageable);
+
+    List<Movimentacao> findByMotoIdOrderByDataMovimentacaoAsc(Long motoId);
 }

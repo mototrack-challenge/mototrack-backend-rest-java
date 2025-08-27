@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MovimentacaoService  {
 
@@ -34,6 +36,15 @@ public class MovimentacaoService  {
     public MovimentacaoResponseDTO buscarPorId(Long id) {
         var movimentacao = buscarEntidadeMovimentacaoPorId(id);
         return MovimentacaoMapper.toResponseDTO(movimentacao);
+    }
+
+    @Transactional(readOnly = true)
+    public List<MovimentacaoResponseDTO> buscarMovimentacoesPorIdDaMoto(Long id) {
+        var moto = motoService.buscarEntidadeMotoPorId(id);
+        var movimentacoes = movimentacaoRepository.findByMotoIdOrderByDataMovimentacaoAsc(moto.getId());
+        return movimentacoes.stream()
+                .map(MovimentacaoMapper::toResponseDTO)
+                .toList();
     }
 
     @Transactional

@@ -42,6 +42,12 @@ public class MovimentacaoController {
         return ResponseEntity.ok(movimentacao);
     }
 
+    @GetMapping("/moto/{id}")
+    public ResponseEntity<List<MovimentacaoResponseDTO>> listarPorMoto(@PathVariable Long id) {
+        var movimentacoes = movimentacaoService.buscarMovimentacoesPorIdDaMoto(id);
+        return ResponseEntity.ok(movimentacoes);
+    }
+
     @PostMapping
     public ResponseEntity<MovimentacaoResponseDTO> salvar(@RequestBody @Valid MovimentacaoRequestDTO movimentacaoRequestDTO, UriComponentsBuilder uriBuilder) {
         var movimentacao = movimentacaoService.salvar(movimentacaoRequestDTO);
