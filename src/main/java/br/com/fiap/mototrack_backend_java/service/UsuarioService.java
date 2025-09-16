@@ -7,6 +7,7 @@ import br.com.fiap.mototrack_backend_java.model.Usuario;
 import br.com.fiap.mototrack_backend_java.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public Page<UsuarioResponseDTO> listarTodos(Pageable pageable) {
@@ -32,8 +36,12 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioResponseDTO salvar(UsuarioRequestDTO usuarioRequestDTO) {
-        var usuario = usuarioRepository.save(UsuarioMapper.toEntity(usuarioRequestDTO));
-        return UsuarioMapper.toResponseDTO(usuario);
+        var usuario = UsuarioMapper.toEntity(usuarioRequestDTO);
+
+        usuario.setSenha(passwordEncoder.encode(usuarioRequestDTO.getSenha()));
+
+        var usuarioSalvo = usuarioRepository.save(usuario);
+        return UsuarioMapper.toResponseDTO(usuarioSalvo);
     }
 
     @Transactional
@@ -43,7 +51,9 @@ public class UsuarioService {
         usuarioAtual.setId(id);
         usuarioAtual.setNome(usuarioRequestDTO.getNome());
         usuarioAtual.setEmail(usuarioRequestDTO.getEmail());
-        usuarioAtual.setSenha(usuarioAtual.getSenha());
+        if (usuarioRequestDTO.getSenha() != null && !usuarioRequestDTO.getSenha().isBlank()) {
+            usuarioAtual.setSenha(passwordEncoder.encode(usuarioRequestDTO.getSenha()));
+        }
 
         var usuarioAtualizado = usuarioRepository.save(usuarioAtual);
         return UsuarioMapper.toResponseDTO(usuarioAtualizado);
