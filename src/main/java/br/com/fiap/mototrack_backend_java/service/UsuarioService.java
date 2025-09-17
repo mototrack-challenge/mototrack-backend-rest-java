@@ -54,6 +54,7 @@ public class UsuarioService {
         if (usuarioRequestDTO.getSenha() != null && !usuarioRequestDTO.getSenha().isBlank()) {
             usuarioAtual.setSenha(passwordEncoder.encode(usuarioRequestDTO.getSenha()));
         }
+        usuarioAtual.setPerfil(usuarioRequestDTO.getPerfil());
 
         var usuarioAtualizado = usuarioRepository.save(usuarioAtual);
         return UsuarioMapper.toResponseDTO(usuarioAtualizado);

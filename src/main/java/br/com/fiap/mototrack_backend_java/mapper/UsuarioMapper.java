@@ -13,6 +13,7 @@ public class UsuarioMapper {
                 usuario.getNome(),
                 usuario.getEmail(),
                 usuario.getSenha(),
+                usuario.getPerfil(),
                 usuario.getDataCriacao()
         );
     }
@@ -24,6 +25,7 @@ public class UsuarioMapper {
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(dto.getSenha());
+        usuario.setPerfil(dto.getPerfil());
         return usuario;
     }
 }

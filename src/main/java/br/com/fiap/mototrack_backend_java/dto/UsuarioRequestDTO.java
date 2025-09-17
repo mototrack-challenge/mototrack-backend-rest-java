@@ -1,7 +1,9 @@
 package br.com.fiap.mototrack_backend_java.dto;
 
+import br.com.fiap.mototrack_backend_java.model.enums.Perfil;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -23,5 +25,8 @@ public class UsuarioRequestDTO {
     @NotBlank(message = "A senha é obrigatória")
     @Size(min = 6, max = 150, message = "A senha deve ter entre 6 e 150 caracteres")
     private String senha;
+
+    @NotNull(message = "O perfil do usuário é obrigatório")
+    private Perfil perfil;
 
 }
