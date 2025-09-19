@@ -11,8 +11,8 @@
 - [📝 Descrição da Solução](#-descrição-da-solução)  
 - [🗄️ Modelagem do Banco de Dados](#️-modelagem-do-banco-de-dados)  
 - [🚀 Como Rodar o Projeto MotoTrack Completo](#-como-rodar-o-projeto-mototrack-completo)  
-- [🖥️ Detalhes do Projeto MVC (Java)](#️-detalhes-do-projeto-mvc-java)  
-- [🚀 Como Rodar o Projeto MVC (Java)](#-como-rodar-o-projeto-mvc-java)  
+- [⚙️ Detalhes do Projeto REST API (Java)](#️-detalhes-do-projeto-rest-api-java)  
+- [🚀 Como Rodar o Projeto API REST (Java)](#-como-rodar-o-projeto-api-rest-java)  
 - [📹 Demonstração em Vídeo](#-demonstração-em-vídeo)  
 
 ## 📝 Descrição da Solução
@@ -300,7 +300,7 @@ A API permite realizar operações de **criação, leitura, atualização e excl
 
 --- 
 
-## 🚀 Como Rodar o Projeto MVC (Java)
+## 🚀 Como Rodar o Projeto API REST (Java)
 
 Para executar o **MotoTrack MVC Java**, siga os passos abaixo:
 
