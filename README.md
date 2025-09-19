@@ -12,8 +12,7 @@
 - [🗄️ Modelagem do Banco de Dados](#️-modelagem-do-banco-de-dados)  
 - [🚀 Como Rodar o Projeto MotoTrack Completo](#-como-rodar-o-projeto-mototrack-completo)  
 - [⚙️ Detalhes do Projeto REST API (Java)](#️-detalhes-do-projeto-rest-api-java)  
-- [🚀 Como Rodar o Projeto API REST (Java)](#-como-rodar-o-projeto-api-rest-java)  
-- [📹 Demonstração em Vídeo](#-demonstração-em-vídeo)  
+- [🚀 Como Rodar o Projeto API REST (Java)](#-como-rodar-o-projeto-api-rest-java)
 
 ## 📝 Descrição da Solução
 
