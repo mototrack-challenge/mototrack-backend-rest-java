@@ -1,17 +1,4 @@
-# 🛵 MotoTrack - Backend (Java)
-
-## 📝 Descrição do Projeto
-
-O **MotoTrack** é um sistema desenvolvido para ajudar no controle e monitoramento das motos utilizadas por uma empresa aluguel de motos. A solução foi pensada para resolver problemas comuns no gerenciamento físico dessas motos, como desorganização nos pátios, dificuldade para localizar veículos disponíveis ou em manutenção, e ausência de histórico rastreável de movimentações.
-
-Com a API desenvolvida em Java, é possível:
-
-- Realizar login e controlar o acesso ao sistema.
-- Cadastrar, editar e listar motos.
-- Acompanhar em tempo real a movimentação de cada moto entre diferentes departamentos (como avaliação, manutenção, pronto para uso).
-- Associar um **status atual** à moto (ex: Em análise, Em manutenção, Disponível).
-- Emitir **alertas** relacionados a situações específicas (ex: Moto parada por muito tempo em um departamento, manutenção pendente).
-- Consultar e gerenciar os diferentes **departamentos** que fazem parte do fluxo operacional da empresa.
+# 🏍️ MotoTrack - Backend API REST (Java)
 
 ## 👥 Integrantes
 
@@ -19,319 +6,317 @@ Com a API desenvolvida em Java, é possível:
 - **Augusto Lope Lyra** – RM558209 – [@lopeslyra10](https://github.com/lopeslyra10)
 - **Vinicius Ribeiro Nery Costa** – RM559165 – [@ViniciusRibeiroNery](https://github.com/ViniciusRibeiroNery)
 
-## 📌 Relação entre os Endpoints
+## 📌 Sumário
 
-- **Usuário**: O ponto de entrada no sistema. Para interagir com os recursos, é necessário estar autenticado por meio de um login com credenciais válidas.
+- [📝 Descrição da Solução](#-descrição-da-solução)  
+- [🗄️ Modelagem do Banco de Dados](#️-modelagem-do-banco-de-dados)  
+- [🚀 Como Rodar o Projeto MotoTrack Completo](#-como-rodar-o-projeto-mototrack-completo)  
+- [🖥️ Detalhes do Projeto MVC (Java)](#️-detalhes-do-projeto-mvc-java)  
+- [🚀 Como Rodar o Projeto MVC (Java)](#-como-rodar-o-projeto-mvc-java)  
+- [📹 Demonstração em Vídeo](#-demonstração-em-vídeo)  
 
-- **Moto**: Cada moto cadastrada representa uma unidade que pode ser rastreada e gerenciada. O cadastro da moto é essencial para registrar movimentações e associar status e alertas.
+## 📝 Descrição da Solução
 
-- **Movimentação**: Toda vez que uma moto troca de local ou de situação, uma movimentação é registrada. Ela indica em qual **departamento** a moto está, em que momento chegou, e permite rastrear todo o seu histórico.
+O **MotoTrack** é um sistema completo desenvolvido para auxiliar empresas de aluguel de motos, como a Mottu, no **controle e monitoramento de sua frota**. 
+A aplicação foi criada para resolver problemas comuns de gestão, como a desorganização nos pátios, dificuldade em localizar motos disponíveis ou em manutenção, 
+e a falta de histórico rastreável de movimentações e serviços.
 
-- **Departamento**: Representa locais físicos ou setores (como "Avaliação", "Manutenção", "Pronta para Uso"). Cada movimentação aponta para um departamento.
+O sistema também oferece funcionalidades para **gerenciamento de serviços e manutenções**, vinculando cada atividade a um **colaborador responsável**
+, além de permitir o **controle de estoque de peças**, garantindo reposição eficiente e visibilidade dos recursos da empresa.
 
-- **Status**: Cada moto possui um status atual (por exemplo, "Em análise", "Em manutenção", "Disponível"). Isso facilita filtros e relatórios operacionais.
+### O sistema permite:
+- 📝 **Cadastro e gestão de motos**;
+- 🏢 **Organização por departamentos**, facilitando a localização de veículos;
+- 🔄 **Controle de movimentações**, com histórico detalhado;
+- 🛠️ **Gestão de serviços e manutenções**, vinculando responsáveis por cada atividade;
+- 👨‍🔧 **Registro de colaboradores** envolvidos nos serviços;
+- 📦 **Controle de estoque de peças**;
+- 🚨 **Disparo de alertas** para acompanhamento do status das motos.
 
-- **Alerta**: Utilizado para sinalizar condições críticas ou especiais associadas à moto (como necessidade urgente de manutenção, tempo excessivo parado em um departamento, etc.).
+### Estrutura da Solução
+O projeto foi dividido em múltiplos módulos para facilitar **escalabilidade e integração**, cada um com responsabilidades específicas:  
 
-Essa estrutura modular permite que o sistema seja escalável, auditável e pronto para futuras integrações com aplicações móveis ou dashboards de visualização.
-
-## 📡 Endpoints da API
-
-Abaixo estão listados os principais endpoints da API do MotoTrack, divididos por entidade. Nos endpoints que requerem envio de dados (POST/PUT), são fornecidos exemplos de JSON.
+- ⚙️ **Backend REST em Java (Spring Boot)** – gerencia as entidades de **usuário, moto, movimentações e alertas**, utilizando **Spring Security com JWT** para autenticação e autorização.  
+- 🖥️ **Backend MVC em Java (Spring MVC)** – oferece as mesmas entidades do backend REST Java, com um **frontend web bonito e funcional**, permitindo cadastro, edição, listagem e exclusão de dados diretamente pelo navegador. Possui **Spring Security** com validação de tipo de usuário (**Administrador** e **Comum**) para controlar o acesso às funcionalidades.
+- 🧩 **Backend REST em .NET (ASP.NET Core)** – gerencia as entidades de **moto (somente leitura das tabelas criadas pelo Java), colaboradores, serviços e peças**, integrando funcionalidades complementares ao sistema.  
+- 📱 **Frontend Mobile (React Native/Expo)** – consome ambas as APIs (Java e .NET) e disponibiliza **telas de cadastro, edição, exclusão e visualização** das funcionalidades, incluindo serviços, colaboradores e estoque de peças.  
+- 🗄️ **Banco de Dados Oracle** – utilizado por todos os backends, com **criação automática de tabelas** ao iniciar os projetos.  
 
 ---
 
-### 🔐 Usuário
+## 🗄️ Modelagem do Banco de Dados
+Abaixo está a modelagem das tabelas utilizadas pelo sistema:  
 
-- `POST - /usuarios/salvar`  
+![Tela de Login](docs/modelagem-moto-track.png)
+
+---
+
+## 🚀 Como Rodar o Projeto MotoTrack Completo
+
+Para utilizar o **MotoTrack** de forma completa, é necessário rodar simultaneamente três módulos:
+
+1. **⚙️ Backend API REST em Java (Spring Boot)** – fornece os endpoints REST para o sistema.
+2. **🧩 Backend API REST em .NET (ASP.NET Core)** – fornece funcionalidades complementares via API.
+3. **📱 Frontend Mobile (React Native/Expo)** – aplicação mobile que consome ambas as APIs e exibe todas as funcionalidades, incluindo serviços, colaboradores e estoque de peças.
+>O **Backend MVC em Java (Spring MVC)** pode ser executado separadamente. Ele permite:
+> - **📝 Login e cadastro de usuários;**
+> - **🏍️ Cadastro, listagem, edição e exclusão de motos;**
+> - **🔄 Cadastro, listagem e exclusão de movimentações e alertas.**
+
+### 🛠️ Passo a Passo
+
+1. Clone todos os repositórios:  
+   - [API Rest Java](https://github.com/mototrack-challenge/mototrack-backend-rest-java)  
+   - [API Rest .NET](https://github.com/mototrack-challenge/mototrack-backend-rest-dotnet)  
+   - [Mobile](https://github.com/mototrack-challenge/mototrack-frontend-mobile)  
+   - [MVC Java](https://github.com/mototrack-challenge/mototrack-backend-mvc-java)
+
+2. 🔌 Configure as credenciais de conexão com o banco Oracle nos arquivos de configuração dos backends, se necessário.
+    - ✅ O banco de dados e as tabelas serão **criados automaticamente** ao iniciar os backends (Java REST, Java MVC e .NET)
+
+3. 🚀 Rode os backends
+    - Java REST: `mvn spring-boot:run` ou rode pelo IDE favorito 
+    - .NET REST: `dotnet run` ou abra no Visual Studio
+
+4. 📱 Rode o frontend mobile:
+    - Navegue até a pasta do projeto e execute `npm install` para instalar dependências  
+    - Execute `npx expo start` para abrir o app no emulador ou dispositivo físico
+
+> ⚠️ Dica: primeiro inicie os backends para que o mobile consiga se conectar às APIs corretamente
+
+5. 🖥️ Para testar o **MVC Java**, basta executar o projeto normalmente; ele funciona isoladamente, sem depender dos outros módulos
+
+---
+
+## ⚙️ Detalhes do Projeto REST API (Java)
+
+O **MotoTrack REST API Java** é o módulo backend desenvolvido com **Spring Boot**, responsável por disponibilizar serviços REST para o gerenciamento da frota de motos, usuários, movimentações, alertas e departamentos.  
+Ele funciona como **camada principal de regras de negócio e persistência de dados**, sendo consumido pelo **Frontend Mobile** e podendo ser integrado com outros módulos da solução.
+
+### 🛠️ Tecnologias e Dependências
+O projeto utiliza as seguintes tecnologias e bibliotecas principais:  
+- **Java 21**  
+- **Spring Boot** – desenvolvimento da API REST  
+- **Spring Data JPA** – integração com o **Oracle Database**  
+- **Spring Security + JWT (JSON Web Token)** – autenticação e autorização via token
+- **Flyway** – versionamento e migração automática do banco de dados 
+- **Maven** – gerenciamento de dependências e build do projeto
+
+### 🔑 Autenticação com JWT
+Para acessar as rotas protegidas da API, é necessário realizar autenticação:  
+1. Enviar uma requisição **POST** para: [http://localhost:8080/auth/login](http://localhost:8080/auth/login)
+Com o corpo:  
+```json
+{
+  "email": "admin@email.com",
+  "senha": "admin123"
+}
+```
+
+2. A resposta retornará um **token JWT**.
+
+3. Esse token deve ser utilizado em todas as próximas requisições no header:
+```bash
+Authorization: Bearer {seu_token_aqui}
+```
+
+> ⚠️ **Observação**: a rota **POST - /usuarios** é **pública** e pode ser usada para cadastrar novos usuários **sem necessidade de token**. Todas as demais rotas de CRUD e acesso ao sistema exigem autenticação via JWT.
+
+
+### 📝 Funcionalidades
+A API permite realizar operações de **criação, leitura, atualização e exclusão** para as seguintes entidades:
+- 🏍️ **Motos**
+- 👤 **Usuários**
+- 🔄 **Movimentações**
+- 🚨 **Alertas**
+- 🏢 **Departamentos**
+
+### 🌐 Exemplos de Endpoints
+
+#### 🔐 Usuário
+
+- `POST - /usuarios`  
   Cadastra um novo usuário.
 
 ```jsonc
 {
-  "nome": "João Silva",
-  "email": "joao@example.com",
-  "senha": "123456"
+  "nome": "Felipe",
+  "email": "felipe@email.com",
+  "senha": "felipe123",
+  "perfil": "ADMIN"
 }
 ```
 
-- `GET - /usuarios/listar/todos`  
+- `GET - /usuarios`  
   Lista todas os usuários cadastrados.
 
-![GET usuarios](images/usuarios-get.png)
-
-- `GET BY ID - /usuarios/listar/{id}`  
+- `GET BY ID - /usuarios/{id}`  
   Lista o usuário cadastrado com este id.
 
-![GET ID usuarios](images/usuarios-get-id.png)
-
-- `PUT - /usuarios/atualizar/{id}`  
+- `PUT - /usuarios/{id}`  
   Atualiza os dados do usuário com este id.
 
 ```jsonc
 {
-  "nome": "João da Silva", // alterando o nome
-  "email": "joao@example.com",
-  "senha": "senha123456" // alterando a senha
+  "nome": "Felipe Sora", // alterando nome
+  "email": "felipe@email.com",
+  "senha": "felipe123",
+  "perfil": "COMUM" // alterando perfil
 }
 ```
 
-- `DELETE - /usuarios/deletar/{id}`  
+- `DELETE - /usuarios/{id}`  
   Remove o usuário com este id.
 
----
+#### 🛵 Moto
 
-### 🛵 Moto
-
-- `POST - /motos/salvar`  
+- `POST - /motos`  
   Cadastra uma nova moto.
 
 ```jsonc
 {
-  "placa": "ABC1234",
-  "modelo": "Mottu-E",
-  "status": {
-    "id_status": 1
-  }
+  "placa": "GHI9015",
+  "chassi": "7723JC4198VR1G74B",
+  "modelo": "MOTTU_E",
+  "status": "AVALIACAO"
 }
 ```
 
-- `GET - /motos/listar/todos`  
+- `GET - /motos`  
   Lista todas as motos cadastradas.
 
-![GET motos](images/motos-get.png)
-
-- `GET BY ID - /motos/listar/{id}`  
+- `GET BY ID - /motos/{id}`  
   Lista a moto cadastrada com este id.
 
-![GET ID motos](images/motos-get-id.png)
-
-- `PUT - /motos/atualizar/{id}`  
-  Atualiza os dados da moto com este id.
+- `PUT - /motos/{id}`  
+  Atualiza os dados da motos com este id.
 
 ```jsonc
 {
-    "placa": "ABC1245", // alterando placa
-    "modelo": "Mottu-E",
-    "status": {
-        "id_status": 2 // alterando status
-    }
+  "placa": "GHI9015",
+  "chassi": "7723JC4198VR1G74B",
+  "modelo": "MOTTU_POP", // alterando modelo
+  "status": "DISPONIVEL" // alterando status
 }
 ```
 
-- `DELETE - /motos/deletar/{id}`  
+- `DELETE - /motos/{id}`  
   Remove a moto com este id.
 
----
+#### 🔁 Movimentação
 
-### 🔁 Movimentação
-
-- `POST - /movimentacoes/salvar`  
+- `POST - /movimentacoes`  
   Cadastra uma nova movimentação.
 
 ```jsonc
 {
-  "moto": {
-    "id_moto": 1
-  },
-  "departamento": {
-    "id_departamento": 1
-  }
+  "moto_id": 1,
+  "departamento_id": 2
 }
 ```
 
-- `GET - /movimentacoes/listar/todos`  
+- `GET - /movimentacoes`  
   Lista todas as movimentações cadastradas.
 
-![GET movimentacoes](images/movimentacoes-get.png)
-
-- `GET BY ID - /movimentacoes/listar/{id}`  
+- `GET BY ID - /movimentacoes/{id}`  
   Lista a movimentação cadastrada com este id.
 
-![GET ID movimentacoes](images/movimentacoes-get-id.png)
-
-- `PUT - /movimentacoes/atualizar/{id}`  
+- `PUT - /movimentacoes/{id}`  
   Atualiza os dados da movimentação com este id.
 
 ```jsonc
 {
-    "timestamp": "2025-05-04T17:49:02.237146",
-    "departamento": {
-        "id_departamento": 3 // alterando o departamento
-    },
-    "moto": {
-        "id_moto":1
-    }
+  "moto_id": 1,
+  "departamento_id": 3 // alterando departamento
 }
 ```
 
-- `DELETE - /movimentacoes/deletar/{id}`  
+- `DELETE - /movimentacoes/{id}`  
   Remove a movimentação com este id.
 
----
+#### 🏬 Departamento
 
-### 🏷️ Status
-
-- `POST - /status/salvar`  
-  Cadastra um novo status.
-
-```jsonc
-{
-  "descricao": "Este status é que a moto está em avaliação",
-  "tipo": "AVALIACAO"
-}
-```
-
-- `GET - /status/listar/todos`  
-  Lista todos os status cadastrados.
-
-![GET status](images/status-get.png)
-
-- `GET BY ID - /status/listar/{id}`  
-  Lista o status cadastrado com este id.
-
-![GET ID status](images/status-get-id.png)
-
-- `PUT - /status/atualizar/{id}`  
-  Atualiza os dados do status com este id.
-
-```jsonc
-{
-    "tipo": "EM_MANUTENCAO", // alterando o tipo
-    "descricao": "Este status é que a moto está em manutenção" // alterando a descricao
-}
-```
-
-- `DELETE - /status/deletar/{id}`  
-  Remove o status com este id.
-
----
-
-### 🏬 Departamento
-
-- `POST - /departamentos/salvar`  
+- `POST - /departamentos`  
   Cadastra um novo departamento.
 
 ```jsonc
 {
-  "nome": "Departamento de Entrada",
-  "tipo": "ENTRADA"
+  "tipo_departamento": "AVALIACAO",
+  "descricao": "Departamento de Avaliação"
 }
 ```
 
-- `GET - /departamentos/listar/todos`  
+- `GET - /departamentos`  
   Lista todos os departamentos cadastrados.
 
-![GET departamentos](images/departamentos-get.png)
-
-- `GET BY ID - /departamentos/listar/{id}`  
+- `GET BY ID - /departamentos/{id}`  
   Lista o departamento com este id.
 
-![GET ID departamentos](images/departamentos-get-id.png)
-
-- `PUT - /departamentos/atualizar/{id}`  
+- `PUT - /departamentos/{id}`  
   Atualiza os dados do departamento com este id.
 
 ```jsonc
 {
-    "nome": "Departamento de Avaliação", // alterando o nome do departamento
-    "tipo": "AVALIACAO" // alterando o tipo do departamento
+  "tipo_departamento": "MANUTENCAO", // alterando tipo do departamento
+  "descricao": "Departamento de Manutenção" // alterando descrição do departamento
 }
 ```
 
-- `DELETE - /departamentos/deletar/{id}`  
+- `DELETE - /departamentos/{id}`  
   Remove o departamentos com este id.
 
----
+#### 🚨 Alerta
 
-### 🚨 Alerta
-
-- `POST - /alertas/salvar`  
+- `POST - /alertas`  
   Cadastra um novo alerta.
 
 ```jsonc
 {
-  "mensagem": "Moto com o motor gravemente danificado.",
-  "moto": {
-    "id_moto": 1
-  }
+  "gravidade": "ALTA",
+  "mensagem": "Pneu dianteiro precisa ser substituído",
+  "moto_id": 1
 }
 ```
 
-- `GET - /alertas/listar/todos`  
+- `GET - /alertas`  
   Lista todos os alertas cadastrados.
 
-![GET alertas](images/alertas-get.png)
-
-- `GET BY ID - /alertas/listar/{id}`  
+- `GET BY ID - /alertas/{id}`  
   Lista o alerta com este id.
 
-![GET ID alertas](images/alertas-get-id.png)
-
-- `PUT - /alertas/atualizar/{id}`  
+- `PUT - /alertas/{id}`  
   Atualiza os dados do alerta com este id.
 
 ```jsonc
 {
-    "mensagem": "Moto com os pneus furados.", // alterando a mensagem
-    "dataAlerta": "2025-05-04T17:52:06.871938",
-    "moto": {
-        "id_moto": 1
-    }
+  "gravidade": "MEDIA", // alterando gravidade do alerta
+  "mensagem": "Pneu dianteiro precisa ser substituído",
+  "moto_id": 1
 }
 ```
 
-- `DELETE - /alertas/deletar/{id}`  
+- `DELETE - /alertas/{id}`  
   Remove o alerta com este id.
 
-## 🚀 Como Executar o Projeto
+--- 
 
-Siga os passos abaixo para rodar o backend do MotoTrack localmente na sua máquina:
+## 🚀 Como Rodar o Projeto MVC (Java)
 
-### 🔧 Pré-requisitos
+Para executar o **MotoTrack MVC Java**, siga os passos abaixo:
 
-Certifique-se de ter as seguintes ferramentas instaladas:
+### 1️⃣ Configurar o Banco de Dados
+- Abra o arquivo de configuração do banco (por exemplo, `application.properties`) e configure as **credenciais de acesso ao Oracle** (usuário, senha e URL).
 
-- **Java 21** ou superior  
-- **Maven**  
-- **IDE** (como IntelliJ IDEA ou Eclipse)  
-- **Oracle Database** (ou um banco já configurado e acessível)  
-- **Postman** (para testar os endpoints)
+### 2️⃣ Verificar Dependências
+- Certifique-se de que o **Maven carregou todas as dependências** corretamente.  
+- No IntelliJ IDEA, o Maven fará o download automático ao abrir o projeto, mas é recomendado verificar na aba **Maven** se todas as dependências foram resolvidas.
 
----
+### 3️⃣ Executar o Projeto
+- Abra o projeto no **IntelliJ IDEA**.  
+- Clique no **ícone de play** na classe principal (`@SpringBootApplication`) para iniciar o servidor.  
+- O projeto será iniciado no **localhost:8080**.
 
-### 📥 1. Clonar o repositório
+### 4️⃣ Acessar a Aplicação
+- Abra o navegador e acesse: [http://localhost:8080](http://localhost:8080)
 
-Abra o terminal e clone o projeto:
-
-```bash
-git clone https://github.com/mototrack-challenge/mototrack-backend-java.git
-```
-
-### 📦 2. Configurar o Banco de Dados
-
-No arquivo `application.properties` (em `src/main/resources`), configure os dados do banco Oracle:
-
-```bash
-spring.datasource.url=jdbc:oracle:thin:@//localhost:1521/XEPDB1
-spring.datasource.username=SEU_USUARIO
-spring.datasource.password=SUA_SENHA
-```
-
-### ⚙️ 3. Compilar e rodar o projeto
-
-Abra o projeto na sua IDE (como IntelliJ ou Eclipse) e clique no **botão verde de "play"** na classe principal: (em `src/main/java/com/mototrack/MotoTrackBackendJavaApplication.java`):
-
-O servidor será iniciado por padrão em:
-
-```bash
-http://localhost:8080/
-```
-
-### 📬 4. Testar com Postman
-
-Abra o Postman e use os endpoints listados na seção anterior.
-
----
-
-### ✅ Pronto!
-Agora você pode testar todos os recursos do MotoTrack diretamente via API REST, utilizando o Postman ou outra ferramenta de sua preferência.
+> ⚠️ Dica: Primeiro configure o banco e verifique as dependências do Maven para evitar erros de inicialização.
